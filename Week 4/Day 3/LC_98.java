@@ -15,22 +15,22 @@
  */
 class Solution {
 
-    public void inorder(TreeNode root, List<Integer> ans){
+    public boolean isValid(TreeNode root, Long min, Long max){
+
         if(root == null){
-            return;
+            return true;
         }
 
-        inorder(root.left, ans);
-        ans.add(root.val);
-        inorder(root.right, ans);
+        if(root.val <= min || root.val >= max){
+            return false;
+        }
+
+        return isValid(root.left, min, (long)root.val)
+            && isValid(root.right, (long)root.val, max);
     }
 
-    public List<Integer> inorderTraversal(TreeNode root) {
+    public boolean isValidBST(TreeNode root) {
 
-        List<Integer> ans = new ArrayList<>();
-
-        inorder(root, ans);
-
-        return ans;
+        return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 }

@@ -14,23 +14,24 @@
  * }
  */
 class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
 
-    public void inorder(TreeNode root, List<Integer> ans){
-        if(root == null){
-            return;
+        TreeNode curr = root;
+
+        while(curr != null){
+
+            if(curr.val == val){
+                return curr;
+            }
+
+            if(val < curr.val){
+                curr = curr.left;
+            }
+            else{
+                curr = curr.right;
+            }
         }
 
-        inorder(root.left, ans);
-        ans.add(root.val);
-        inorder(root.right, ans);
-    }
-
-    public List<Integer> inorderTraversal(TreeNode root) {
-
-        List<Integer> ans = new ArrayList<>();
-
-        inorder(root, ans);
-
-        return ans;
+        return null;
     }
 }
